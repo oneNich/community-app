@@ -138,11 +138,11 @@ textarea {
 }
 
 .tab-content {
-    display: none;
+    display: none !important;
 }
 
-.tab-content.active {
-    display: block;
+.tab-content:not(.hidden) {
+    display: block !important;
 }
 
 .card {

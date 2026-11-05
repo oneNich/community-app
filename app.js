@@ -127,22 +127,14 @@ function showMainView() {
     document.getElementById('mainView').classList.remove('hidden');
 }
 
-// Tabs - attach after DOM ready
-function setupTabs() {
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+// Global tab switching function
+function switchTab(tabName) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
 
-            btn.classList.add('active');
-            const tabName = btn.dataset.tab + 'Tab';
-            document.getElementById(tabName).classList.remove('hidden');
-        });
-    });
+    document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+    document.getElementById(tabName + 'Tab').classList.remove('hidden');
 }
-
-// Profile
 document.getElementById('profileForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
     const phone = document.getElementById('profilePhone').value;
@@ -391,7 +383,7 @@ function registerServiceWorker() {
 
 // Setup event listeners
 function setupEventListeners() {
-    setupTabs();
+    // Tab switching is handled by onclick in HTML
 }
 
 // Initialize on load

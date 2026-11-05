@@ -7,7 +7,6 @@ const store = {
     comments: []
 };
 
-// Initialize app
 function init() {
     loadFromStorage();
     currentUser = getCurrentUser();
@@ -19,7 +18,6 @@ function init() {
         showAuthView();
     }
 
-    setupEventListeners();
     registerServiceWorker();
 }
 
@@ -33,7 +31,6 @@ function loadFromStorage() {
         store.tasks = parsed.tasks || [];
         store.comments = parsed.comments || [];
     } else {
-        // Seed demo data on first visit
         seedDemoData();
     }
 }
@@ -116,7 +113,6 @@ document.getElementById('logoutBtn')?.addEventListener('click', () => {
     document.getElementById('authForm').reset();
 });
 
-// View switching
 function showAuthView() {
     document.getElementById('authView').classList.remove('hidden');
     document.getElementById('mainView').classList.add('hidden');
@@ -127,20 +123,7 @@ function showMainView() {
     document.getElementById('mainView').classList.remove('hidden');
 }
 
-// Global tab switching function
-function switchTab(tabName) {
-    console.log('switchTab called with:', tabName);
-    document.getElementById('membersTab').style.display = 'none';
-    document.getElementById('issuesTab').style.display = 'none';
-    document.getElementById('tasksTab').style.display = 'none';
-
-    document.getElementById(tabName + 'Tab').style.display = 'block';
-
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-
-    console.log('Tab switched to:', tabName);
-}
+// Profile
 document.getElementById('profileForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
     const phone = document.getElementById('profilePhone').value;
@@ -236,14 +219,11 @@ function renderMembers() {
     const list = document.getElementById('membersList');
     list.innerHTML = '';
 
-    // Current user profile
-    const phone = currentUser.phone || 'Not set';
     const profileForm = document.getElementById('profileForm');
     if (profileForm) {
         document.getElementById('profilePhone').value = currentUser.phone || '';
     }
 
-    // Other members
     store.members.filter(m => m.id !== currentUser.id).forEach(member => {
         const item = document.createElement('div');
         item.className = 'list-item';
@@ -287,7 +267,6 @@ function renderTasks() {
     store.tasks.forEach(task => {
         const issue = store.issues.find(i => i.id === task.issueId);
         const assignee = task.assignedTo ? store.members.find(m => m.id === task.assignedTo) : null;
-        const canEdit = task.createdBy === currentUser.id;
         const commentCount = store.comments.filter(c => c.taskId === task.id).length;
 
         const item = document.createElement('div');
@@ -378,19 +357,10 @@ document.getElementById('taskModal')?.addEventListener('click', (e) => {
     if (e.target === document.getElementById('taskModal')) closeTaskModal();
 });
 
-// Service Worker
 function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js').catch(() => {
-            // Service worker not critical
-        });
+        navigator.serviceWorker.register('sw.js').catch(() => {});
     }
 }
 
-// Setup event listeners
-function setupEventListeners() {
-    // Tab switching is handled by onclick in HTML
-}
-
-// Initialize on load
 window.addEventListener('load', init);

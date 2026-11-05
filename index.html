@@ -4,93 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#4f46e5">
-    <meta name="description" content="Community task management app">
     <title>Community App</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%234f46e5' width='192' height='192'/><text x='50%' y='50%' font-size='120' fill='white' text-anchor='middle' dominant-baseline='central'>C</text></svg>">
 </head>
 <body>
     <div id="app">
-        <div class="container">
-            <!-- Auth View -->
-            <div id="authView" class="view">
-                <div class="auth-card">
-                    <h1>Community App</h1>
-                    <form id="authForm">
-                        <input id="authEmail" type="email" placeholder="Email" required>
-                        <input id="authPassword" type="password" placeholder="Password" required>
-                        <button type="submit">Login / Register</button>
-                    </form>
-                </div>
+        <!-- Auth View -->
+        <div id="authView" class="view">
+            <div class="auth-card">
+                <h1>Community App</h1>
+                <form id="authForm">
+                    <input id="authEmail" type="email" placeholder="Email" required>
+                    <input id="authPassword" type="password" placeholder="Password" required>
+                    <button type="submit">Login / Register</button>
+                </form>
             </div>
+        </div>
 
-            <!-- Main App View -->
-            <div id="mainView" class="view hidden">
-                <header>
-                    <h1>Community App</h1>
-                    <button id="logoutBtn" class="btn-secondary">Logout</button>
-                </header>
+        <!-- Main App View -->
+        <div id="mainView" class="view hidden">
+            <header>
+                <h1>Community App</h1>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </header>
 
-                <nav class="tabs">
-                    <button class="tab-btn active" data-tab="members" onclick="switchTab('members')">Members</button>
-                    <button class="tab-btn" data-tab="issues" onclick="switchTab('issues')">Issues</button>
-                    <button class="tab-btn" data-tab="tasks" onclick="switchTab('tasks')">Tasks</button>
-                </nav>
+            <div class="container">
+                <!-- Profile Section -->
+                <section class="card">
+                    <h2>My Profile</h2>
+                    <form id="profileForm">
+                        <input id="profilePhone" type="tel" placeholder="Phone">
+                        <input id="profileEmail" type="email" placeholder="Email" readonly>
+                        <button type="submit" class="btn-primary">Save Profile</button>
+                    </form>
+                </section>
 
-                <!-- Members Tab -->
-                <div id="membersTab" style="display: block;">
-                    <div class="card">
-                        <h2>My Profile</h2>
-                        <form id="profileForm">
-                            <input id="profilePhone" type="tel" placeholder="Phone">
-                            <input id="profileEmail" type="email" placeholder="Email" readonly>
-                            <button type="submit" class="btn-primary">Save Profile</button>
-                        </form>
-                    </div>
-                    <div class="card">
-                        <h2>Community Members</h2>
-                        <div id="membersList" class="list"></div>
-                    </div>
-                </div>
+                <!-- Members Section -->
+                <section class="card">
+                    <h2>Community Members</h2>
+                    <div id="membersList" class="list"></div>
+                </section>
 
-                <!-- Issues Tab -->
-                <div id="issuesTab" style="display: none;">
-                    <div class="card">
-                        <h2>Create Issue</h2>
-                        <form id="issueForm">
-                            <input id="issueTitle" type="text" placeholder="Issue title" required>
-                            <textarea id="issueDesc" placeholder="Description"></textarea>
-                            <button type="submit" class="btn-primary">Create</button>
-                        </form>
-                    </div>
-                    <div class="card">
-                        <h2>Issues</h2>
-                        <div id="issuesList" class="list"></div>
-                    </div>
-                </div>
+                <!-- Issues Section -->
+                <section class="card">
+                    <h2>Create Issue</h2>
+                    <form id="issueForm">
+                        <input id="issueTitle" type="text" placeholder="Issue title" required>
+                        <textarea id="issueDesc" placeholder="Description"></textarea>
+                        <button type="submit" class="btn-primary">Create Issue</button>
+                    </form>
+                </section>
 
-                <!-- Tasks Tab -->
-                <div id="tasksTab" style="display: none;">
-                    <div class="card">
-                        <h2>Create Task</h2>
-                        <form id="taskForm">
-                            <select id="taskIssue" required>
-                                <option value="">Select issue</option>
-                            </select>
-                            <input id="taskTitle" type="text" placeholder="Task title" required>
-                            <textarea id="taskDesc" placeholder="Description"></textarea>
-                            <select id="taskAssignee">
-                                <option value="">Unassigned</option>
-                            </select>
-                            <button type="submit" class="btn-primary">Create</button>
-                        </form>
-                    </div>
-                    <div class="card">
-                        <h2>All Tasks</h2>
-                        <div id="tasksList" class="list"></div>
-                    </div>
-                </div>
+                <section class="card">
+                    <h2>All Issues</h2>
+                    <div id="issuesList" class="list"></div>
+                </section>
+
+                <!-- Tasks Section -->
+                <section class="card">
+                    <h2>Create Task</h2>
+                    <form id="taskForm">
+                        <select id="taskIssue" required>
+                            <option value="">Select issue</option>
+                        </select>
+                        <input id="taskTitle" type="text" placeholder="Task title" required>
+                        <textarea id="taskDesc" placeholder="Description"></textarea>
+                        <select id="taskAssignee">
+                            <option value="">Unassigned</option>
+                        </select>
+                        <button type="submit" class="btn-primary">Create Task</button>
+                    </form>
+                </section>
+
+                <section class="card">
+                    <h2>All Tasks</h2>
+                    <div id="tasksList" class="list"></div>
+                </section>
             </div>
         </div>
     </div>

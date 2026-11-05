@@ -32,7 +32,41 @@ function loadFromStorage() {
         store.issues = parsed.issues || [];
         store.tasks = parsed.tasks || [];
         store.comments = parsed.comments || [];
+    } else {
+        // Seed demo data on first visit
+        seedDemoData();
     }
+}
+
+function seedDemoData() {
+    const now = new Date().toISOString();
+
+    store.members = [
+        { id: 1, email: 'alice@example.com', password: 'demo', name: 'Alice', phone: '555-0001' },
+        { id: 2, email: 'bob@example.com', password: 'demo', name: 'Bob', phone: '555-0002' },
+        { id: 3, email: 'carol@example.com', password: 'demo', name: 'Carol', phone: '555-0003' }
+    ];
+
+    store.issues = [
+        { id: 101, title: 'Website Redesign', description: 'Modernize the landing page', createdBy: 1, createdAt: now },
+        { id: 102, title: 'API Documentation', description: 'Complete REST API docs', createdBy: 2, createdAt: now },
+        { id: 103, title: 'Bug Fixes', description: 'Fix critical bugs reported', createdBy: 1, createdAt: now }
+    ];
+
+    store.tasks = [
+        { id: 1001, issueId: 101, title: 'Design mockups', description: 'Create Figma mockups', assignedTo: 2, createdBy: 1, createdAt: now },
+        { id: 1002, issueId: 101, title: 'Frontend implementation', description: 'Build React components', assignedTo: 3, createdBy: 1, createdAt: now },
+        { id: 1003, issueId: 102, title: 'Write API guide', description: 'Document all endpoints', assignedTo: 1, createdBy: 2, createdAt: now },
+        { id: 1004, issueId: 103, title: 'Fix login bug', description: 'Users cannot reset password', assignedTo: 2, createdBy: 1, createdAt: now }
+    ];
+
+    store.comments = [
+        { id: 2001, taskId: 1001, authorId: 1, text: 'Looking good! Can we add dark mode?', createdAt: now },
+        { id: 2002, taskId: 1001, authorId: 2, text: 'Sure, will include that in v2', createdAt: now },
+        { id: 2003, taskId: 1004, authorId: 3, text: 'I found the issue - it\'s in the reset controller', createdAt: now }
+    ];
+
+    saveToStorage();
 }
 
 function saveToStorage() {

@@ -4,7 +4,9 @@
     box-sizing: border-box;
 }
 
-:root {
+.hidden {
+    display: none !important;
+}
     --primary: #4f46e5;
     --primary-dark: #4338ca;
     --secondary: #6b7280;

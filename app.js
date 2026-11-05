@@ -127,17 +127,20 @@ function showMainView() {
     document.getElementById('mainView').classList.remove('hidden');
 }
 
-// Tabs
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+// Tabs - attach after DOM ready
+function setupTabs() {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
 
-        btn.classList.add('active');
-        const tabName = btn.dataset.tab + 'Tab';
-        document.getElementById(tabName).classList.remove('hidden');
+            btn.classList.add('active');
+            const tabName = btn.dataset.tab + 'Tab';
+            document.getElementById(tabName).classList.remove('hidden');
+        });
     });
-});
+}
 
 // Profile
 document.getElementById('profileForm')?.addEventListener('submit', (e) => {
@@ -388,7 +391,7 @@ function registerServiceWorker() {
 
 // Setup event listeners
 function setupEventListeners() {
-    // Already done above
+    setupTabs();
 }
 
 // Initialize on load

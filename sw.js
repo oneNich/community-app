@@ -1,10 +1,10 @@
 const CACHE_NAME = 'community-app-v1';
 const urlsToCache = [
-  '/community-app/',
-  '/community-app/index.html',
-  '/community-app/styles.css',
-  '/community-app/app.js',
-  '/community-app/manifest.json'
+  './',
+  './index.html',
+  './styles.css',
+  './app.js',
+  './manifest.json'
 ];
 
 self.addEventListener('install', (event) => {

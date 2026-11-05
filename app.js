@@ -129,11 +129,14 @@ function showMainView() {
 
 // Global tab switching function
 function switchTab(tabName) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+    document.getElementById('membersTab').style.display = 'none';
+    document.getElementById('issuesTab').style.display = 'none';
+    document.getElementById('tasksTab').style.display = 'none';
 
+    document.getElementById(tabName + 'Tab').style.display = 'block';
+
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-    document.getElementById(tabName + 'Tab').classList.remove('hidden');
 }
 document.getElementById('profileForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
